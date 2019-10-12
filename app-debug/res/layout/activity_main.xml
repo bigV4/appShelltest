@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditText android:id="@id/server" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="http://" android:hint="请输入有效的服务器地址" android:ems="10" android:inputType="textPersonName" app:layout_constraintTop_toTopOf="parent" />
+    <EditText android:id="@id/usrname" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="请输入用户名" android:ems="10" android:inputType="textPersonName" app:layout_constraintTop_toBottomOf="@id/server" />
+    <EditText android:id="@id/psd" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="请输入密码" android:ems="10" android:inputType="textPassword" app:layout_constraintTop_toBottomOf="@id/usrname" />
+    <Button android:id="@id/login" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="登录" app:layout_constraintBottom_toTopOf="@id/logout" app:layout_constraintTop_toBottomOf="@id/psd" />
+    <Button android:id="@id/logout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="注销" app:layout_constraintTop_toBottomOf="@id/login" />
+    <Button android:id="@id/web" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="网页加载" app:layout_constraintTop_toBottomOf="@id/logout" />
+    <Switch android:id="@id/secureSwitch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="保护开关" app:layout_constraintTop_toBottomOf="@id/web" />
+</android.support.constraint.ConstraintLayout>

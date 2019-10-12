@@ -1,0 +1,46 @@
+#!/bin/bash 
+
+function LOG() {
+    w=`echo "  $*  " | tr ' ' '#'`
+    n=$COLUMN_NUM
+    a=${#w}
+    b=$(( (n-a)/2 ))
+    c=$(( n-a-b ))
+    printf "\n$COLOR_BEGIN%*s$w%*s$COLOR_END\n" $b = $c = | tr ' #' '= '
+}
+
+function show_help() {
+    echo "usage: decompile /Users/test/Desktop/demo.apk"
+    echo "usage: decompile /Users/test/Desktop/demo.apk directory"
+    echo "-------------------------------------------------"
+    echo "First argument is apk path. Second argument is decompile directory name"
+}
+
+if [ $# -eq 0 ];then
+	show_help
+	exit 1
+fi
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ];then
+    show_help
+    exit 1
+fi
+
+LOG start decompile
+
+OutDir=$(basename $1 .apk)
+
+if [ $# -eq 1 ];
+	then
+		apktool d $1
+	else
+		apktool d $1 -o $2
+		OutDir=$2
+	
+	if [ $? != 0 ]; then
+    	LOG failed decompile
+    	exit 1
+	fi
+fi
+
+LOG end decompile
