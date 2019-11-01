@@ -65,7 +65,7 @@ def get_request_data(request, for_key):
             print(str(e))
             return str(e)
 
-    if for_key and data.has_key(for_key):
+    if for_key and for_key in data:
         return data.get(for_key, "")
 
     return data
@@ -593,16 +593,19 @@ def inner_page():
 
 def test_ajax():
     data = ""
-    if request.method == "POST" and request.json and request.json.has_key("data"):
+    if request.method == "POST" and request.json and "data" in request.json:
         data = request.json.get("data")
     elif request.method == "GET" and request.args.get("data"):
         data = request.args.get("data")
     resp = make_response(json.dumps({"remoteDataJson": "Ajax request success!", "request_data": data}))
+    #resp.headers["Content-Type"] =  "text/html; charset=utf-8"
+    resp.headers["Content-Type"] =  "application/json"
     resp.headers["Access-Control-Allow-Origin"] = "*"
     resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS,HEAD'
     resp.headers["Access-Control-Allow-Headers"] = "x-requested-with,content-type,test-expose-header"
     resp.headers["Access-Control-Expose-Headers"] = "test-expose-header"
     resp.headers["test-expose-header"] = "response-test-expose-header"
+    print("ajax",resp)
     return resp
 
 
@@ -656,7 +659,7 @@ def redirect():
                 data = json.loads(data)
             elif request.form is not None:
                 data = request.form
-            elif request.values and request.values.has_key("location_host"):
+            elif request.values and "location_host" in adictrequest.values:
                 data = request.values
             else:
                 data = request.data
@@ -756,6 +759,7 @@ def test_result():
 
 if __name__ == "__main__":
     #init_db()
-    app.run(host='::', port=5001, threaded=True, debug=True)
+    #app.run(host='::', port=5001, threaded=True, debug=True)
+    app.run(host='::', port=8088, threaded=True, debug=True)
     # server = pywsgi.WSGIServer(('::', 5001), app)
     # server.serve_forever()

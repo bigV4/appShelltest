@@ -53,9 +53,9 @@ def getRandomIPv4():
 
 def brute_force(user, password):
     port_list =["80","81","8080","7000","8092","5001","3389","514","21","514","514","22"]
-    port_list =["7000"]
+    port_list =["8088","80"]
     port = random.choice(port_list)
-    domain = random.choice(["172.16.95.25:"+port, "10.10.67.180:514/weibo"])
+    domain = random.choice(["172.16.95.50:"+port, "172.16.95.50:8088/wibbi/"])
     #domain = random.choice(["s.weibo.com:80/weibo","s.weibo.com:80/weibo/baidu?wd="])
     name = user.strip()
     passwd = password.strip()
@@ -115,7 +115,7 @@ def brute_force(user, password):
     AE = "gzip, deflate"
     ip_random=getRandomIPv4()
     #ip_random = "172.16.114.11"
-    host_list = ["news.16312.cn","scjg.gswdc.cn","jg.acdc.cn","www.csdfsa.com"]
+    host_list = ["testweb.16312.cn","scjg.testweb.cn","testweb.acdc.cn","www.testweb.com"]
     if "8092" in url or "baidu" in url:
         HostExp = "www.baidu.com"
     elif "514" in url or "weibo" in url:
