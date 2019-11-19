@@ -488,6 +488,15 @@ userInfo = {
             'limu': {'user_name': 'limu', 'age': '29', 'sex': 'male', 'amount': '77000'}
             }
 
+userPasswdDic = {
+            'feifei': "PassWord",
+            'qiqi': "123456",
+            'liyi': "666666",
+            'lili': "mimajiushi1",
+            'zhangdm': "123321",
+            'limumu': "qazwsx",
+            'limu': "qwe123"
+            }
 
 @app.route("/detail/", methods=['GET', 'POST'])
 def userDetail():
@@ -505,41 +514,49 @@ def userDetail():
 
 @app.route("/register/", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
 @app.route("/login/", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
+@app.route("/login", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
 def register():
     user = ""
     name = ""
     password = ""
+    argslist =[]
     if request.method == 'POST':
         try:
             if request.json is not None:
                 data = request.json
-                #print("request.json",type(request.json), request.json)
+                print("request.json",type(request.json), request.json)
             elif request.form is not None and len(request.form) > 0:
                 data = request.form
-                #print("request.form",type(request.form), request.form)
-                '''
+                print("request.form",type(request.form), request.form)
                 for key in data:
-                    if not name:
-                        name = key
-                    elif not password:
-                        password = key
-                '''
-                name = data.getlist("uid")[0]
-                password = data.getlist("passw")[0]
+                    argslist.append(key)
+                print(argslist)
+                if ""!=data.getlist(argslist[0])[0]:
+                    #data为uid=qiqi&passw=123456的情况
+                    name = data.getlist("uid")[0]
+                    password = data.getlist("passw")[0]
+                else:
+                    #data为qiqi&123456的情况
+                    for key in data:
+                        if not name:
+                            name=key
+                        elif not password:
+                            password = key
+                    
             elif type(request.data) == str:
                 data = json.dumps(request.data, ensure_ascii=False)
 
             user = data.get("user_name")
         except Exception as e:
             print("Json does not exist!!")
-            print(str(e))
+            print(e)
             return str(e)
     elif request.method == 'GET':
         user = request.args.get("user_name")
 
     info = ""
     if name in userInfo.keys():
-        if password == "123456":
+        if password == userPasswdDic.get(name):
             info = userInfo.get(name)
         else:
             info = {'error': u'密码错误!'}
@@ -554,7 +571,7 @@ def register():
 
 
 @app.route(
-    "/api/testestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestestes/",
+    "/api/testestestestestestestestestestestestestestestestestestest/test",
     methods=['GET', 'POST'])
 def show_long_url_path():
     if request.method == 'GET':
