@@ -479,13 +479,13 @@ def show_about():
     return render_template('about.html')
 
 userInfo = {
-            'feifei': {'user_name': 'feifei', 'age': '30', 'sex': 'male', 'amount': '10000'},
-            'qiqi': {'user_name': 'qiqi', 'age': '25', 'sex': 'female', 'amount': '30000'},
-            'liyi': {'user_name': 'liyi', 'age': '20', 'sex': 'male', 'amount': '22000'},
-            'lili': {'user_name': 'lili', 'age': '56', 'sex': 'female', 'amount': '20030'},
-            'zhangdm': {'user_name': 'zhangdm', 'age': '27', 'sex': 'male', 'amount': '60000'},
-            'limumu': {'user_name': 'limumu', 'age': '21', 'sex': 'male', 'amount': '70000'},
-            'limu': {'user_name': 'limu', 'age': '29', 'sex': 'male', 'amount': '77000'}
+            'feifei': {'user_name': 'feifei', 'age': '30', 'sex': 'male', 'Tel': '13867239769', 'amount': '10000'},
+            'qiqi': {'user_name': 'qiqi', 'age': '25', 'sex': 'female', 'Tel': '17788127747', 'amount': '30000'},
+            'liyi': {'user_name': 'liyi', 'age': '20', 'sex': 'male', 'Tel': '18862379965', 'amount': '22000'},
+            'lili': {'user_name': 'lili', 'age': '56', 'sex': 'female', 'Tel': '13934081287', 'amount': '20030'},
+            'zhangdm': {'user_name': 'zhangdm', 'age': '27', 'sex': 'male', 'Tel': '16691839283', 'amount': '60000'},
+            'limumu': {'user_name': 'limumu', 'age': '21', 'sex': 'male', 'Tel': '13199238746', 'amount': '70000'},
+            'limu': {'user_name': 'limu', 'age': '29', 'sex': 'male', 'Tel': '138618397712', 'amount': '77000'}
             }
 
 userPasswdDic = {
@@ -523,9 +523,15 @@ def register():
     if request.method == 'POST':
         try:
             if request.json is not None:
+                #请求的Content-Type: application/json
                 data = request.json
                 print("request.json",type(request.json), request.json)
+                name = data["uid"]
+                password = data["passw"]
+                print("name",name)
+                print("password",password)
             elif request.form is not None and len(request.form) > 0:
+                #请求的Content-Type: application/x-www-form-urlencoded
                 data = request.form
                 print("request.form",type(request.form), request.form)
                 for key in data:
@@ -539,7 +545,7 @@ def register():
                     #data为qiqi&123456的情况
                     for key in data:
                         if not name:
-                            name=key
+                            name = key
                         elif not password:
                             password = key
                     
@@ -552,7 +558,8 @@ def register():
             print(e)
             return str(e)
     elif request.method == 'GET':
-        user = request.args.get("user_name")
+        name = request.args.get("uid")
+        password = request.args.get("passw")
 
     info = ""
     if name in userInfo.keys():
