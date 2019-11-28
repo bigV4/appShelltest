@@ -515,6 +515,7 @@ def userDetail():
 @app.route("/register/", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
 @app.route("/login/", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
 @app.route("/login", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
+@app.route("/userinfo.do", methods=['GET', 'POST', 'OPTIONS', 'HEAD'])
 def register():
     user = ""
     name = ""
