@@ -1,0 +1,53 @@
+#!/bin/bash
+
+function LOG() {
+    w=`echo "  $*  " | tr ' ' '#'`
+    n=$COLUMN_NUM
+    a=${#w}
+    b=$(( (n-a)/2 ))
+    c=$(( n-a-b ))
+    printf "\n$COLOR_BEGIN%*s$w%*s$COLOR_END\n" $b = $c = | tr ' #' '= '
+}
+
+function show_help() {
+    echo "usage: . /compile directory"
+	echo "output: directory/dist/xxx_signed.apk"
+    echo "-------------------------------------------------"
+    echo "First argument is decompile directory"
+}
+
+if [ $# -eq 0 ];then
+    show_help
+    exit 1
+fi
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ];then
+    show_help
+    exit 1
+fi
+
+LOG start compile
+
+apktool b $1
+
+if [ $? != 0 ]; then
+	LOG failed compile
+	exit 1
+fi
+
+LOG start APK sign
+
+rm ./$1/dist/*signed.apk
+
+APKname=$(basename ./$1/dist/*.apk .apk)
+
+echo $APKname
+
+echo "admin123" | jarsigner -verbose -keystore apk_sign_key_cuangai.jks -signedjar $1/dist/${APKname}_signed.apk $1/dist/${APKname}.apk  sign_apk
+
+if [ $? != 0 ]; then
+    LOG failed APK sign
+    exit 1
+fi
+
+LOG end compile

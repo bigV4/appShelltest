@@ -3,6 +3,7 @@ import os
 import sqlite3
 import json
 import os.path
+import sys
 
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, Response, make_response, jsonify, current_app, \
@@ -40,7 +41,7 @@ def get_response_data(data):
     try:
         resp_data = json.dumps(return_dict).decode('unicode-escape').encode('utf-8')
     except Exception as e:
-        print(e.message)
+        print(e)
         resp_data = json.dumps(return_dict, ensure_ascii=False)
 
     return resp_data
@@ -163,17 +164,19 @@ def close_db(error):
 
 def init_db():
     if os.path.isfile(app.config['DATABASE']):
-        return
+        print("os.path.isfile(app.config['DATABASE'])")
+        pass
+        #return
     with app.app_context():
         db = get_db()
+        print
         with app.open_resource('schema.sql', mode='r') as f:
             db.cursor().executescript(f.read())
         db.commit()
-
+    print("init_db()")
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index/")
-@app.route("/api/home")
 @app.route("/index.jsp")
 @app.route("/index.asp")
 @app.route("/index.aspx")
@@ -192,7 +195,7 @@ def large_page():
 
 @app.route('/sync_conf/', methods=['GET', 'POST', 'DELETE'])
 @app.route('/api/', methods=['GET', 'POST', 'DELETE'])
-# @gzipped
+@gzipped
 def show_entries():
     db = get_db()
     if request.method == 'DELETE':
@@ -268,7 +271,7 @@ def show_entries():
         buf.close()
         f.close()
     except Exception as ex:
-        print("Request data: ", ex.message)
+        print("Request data: ", ex)
 
     resp_data = get_response_data(data)
     resp = make_response(resp_data)
@@ -301,7 +304,7 @@ def api_gzip():
         buf.close()
         f.close()
     except Exception as ex:
-        print("Request data: {0}, needn't to unzip.".format(ex.message))
+        print("Request data: {0}, needn't to unzip.".format(ex))
 
     data = json.dumps({'records': body}).decode('unicode-escape').encode('utf-8')
 
@@ -759,7 +762,7 @@ def test_result():
                 db.close()
                 return json.dumps({'result': True})
             except Exception as e:
-                print(e.message)
+                print(e)
                 return json.dumps({'result': False})
         else:
             form = request.form
@@ -783,8 +786,23 @@ def test_result():
 
 
 if __name__ == "__main__":
-    #init_db()
-    #app.run(host='::', port=5001, threaded=True, debug=True)
-    app.run(host='::', port=8088, threaded=True, debug=True)
+    init_db()
+    try:
+        a = 0
+        if sys.argv:
+            for i in sys.argv:
+                print(type(sys.argv[a]),"sys.argv[%r] = %r"%(a,i))
+                a+=1
+            if 1<=int(sys.argv[1])<=65535:
+                app.run(host='::', port=sys.argv[1], threaded=True, debug=True)
+            else:
+                app.run(host='::', port=8089, threaded=True, debug=True)
+    except  IndexError as e1:
+        print(e1)
+        app.run(host='::', port=8089, threaded=True, debug=True)
+    except  ValueError as e2:
+        print(e2)
+        app.run(host='::', port=8089, threaded=True, debug=True)
+    
     # server = pywsgi.WSGIServer(('::', 5001), app)
     # server.serve_forever()
