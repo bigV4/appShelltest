@@ -4,6 +4,7 @@ import sqlite3
 import json
 import os.path
 import sys
+import time
 
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, Response, make_response, jsonify, current_app, \
@@ -708,6 +709,14 @@ def redirect():
         resp.headers["location"] = "http://{0}/".format(request.host)
     return resp
 
+@app.route("/make_redirect", methods=['GET'])
+def make_redirect():
+    resp = make_response("302", 302)
+    resp.headers["location"] = "http://{0}/make_redirect".format(request.host)
+    time.sleep(1)
+    #return resp
+    return render_template('AutoRefresh.html'), 412
+    
 
 @app.route('/mydict', methods=['GET', 'POST'])
 def mydict():
