@@ -801,6 +801,12 @@ def test_result():
     if request.method == "GET":
         return render_template('test_results.html')
 
+@app.route('/pac', methods = ['GET'])
+def returnpac():
+    with open('static/pac') as f:
+        s=f.read()
+        f.close()
+    return str(s)
 
 if __name__ == "__main__":
     init_db()
