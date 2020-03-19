@@ -715,8 +715,13 @@ def make_redirect():
     resp.headers["location"] = "http://{0}/make_redirect".format(request.host)
     time.sleep(1)
     #return resp
-    return render_template('AutoRefresh.html'), 412
-    
+    return render_template('AutoRefresh.html'), 302
+
+@app.route("/make_reload", methods=['GET'])
+def make_reload():
+    time.sleep(1)
+    #return resp
+    return render_template('Reload.html'), 202
 
 @app.route('/mydict', methods=['GET', 'POST'])
 def mydict():
