@@ -801,12 +801,18 @@ def test_result():
     if request.method == "GET":
         return render_template('test_results.html')
 
+@app.route('/<path>')
+def today(path):
+    base_dir = os.path.dirname(__file__)
+    resp = make_response(open(os.path.join(base_dir, path)).read())
+    resp.headers["Content-type"]="text/plan;charset=UTF-8"
+    return resp
+
 @app.route('/pac', methods = ['GET'])
 def returnpac():
-    with open('static/pac') as f:
-        s=f.read()
-        f.close()
-    return str(s)
+    resp = make_response(open('static/pac').read())
+    resp.headers["Content-type"]="text/plan;charset=UTF-8"
+    return resp
 
 if __name__ == "__main__":
     init_db()
