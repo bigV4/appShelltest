@@ -36,7 +36,6 @@ app.config.update(dict(
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
-
 def get_response_data(data):
     return_dict = {'records': data}
     try:
@@ -175,6 +174,10 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
     print("init_db()")
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'img/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index/")
