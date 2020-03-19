@@ -811,7 +811,7 @@ def today(path):
 @app.route('/pac', methods = ['GET'])
 def returnpac():
     resp = make_response(open('static/pac').read())
-    resp.headers["Content-type"]="text/plan;charset=UTF-8"
+    resp.headers["Content-type"]="text/html;charset=UTF-8"
     return resp
 
 if __name__ == "__main__":
