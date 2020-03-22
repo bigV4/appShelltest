@@ -60,19 +60,23 @@
             </tr>
             <tr>
                 <td class="info_table_label">Remote Host</td>
-                <td>unavailable</td>
+                <td>{{remotehost}}</td>
             </tr>
             <tr>
-                <td class="info_table_label">User Agent</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36</td>
+                <td class="info_table_label">Host</td>
+                <td>{{host}}</td>
+            </tr>
+            <tr>
+                <td class="info_table_label">User-Agent</td>
+                <td>{{ua}}</td>
             </tr>
             <tr>
                 <td class="info_table_label">Port</td>
-                <td>31330</td>
+                <td>{{port}}</td>
             </tr>
             <tr>
-                <td class="info_table_label">Language</td>
-                <td>zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7</td>
+                <td class="info_table_label">Accept-Language</td>
+                <td>{{language}}</td>
             </tr>
             <tr>
                 <td class="info_table_label">Referer</td>
@@ -108,7 +112,7 @@
             </tr>
             <tr>
                 <td class="info_table_label">X-Forwarded-For</td>
-                <td>118.112.58.78, 216.239.38.21</td>
+                <td>{{xff}}</td>
             </tr>
         </table>
     </div>
@@ -119,17 +123,17 @@
             <tr>
                 <td class="cli_command">$ curl ifconfig.me</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>118.112.58.78</td>
+                <td>{{user_ip}}</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/ip</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>118.112.58.78</td>
+                <td>{{user_ip}}</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/host</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>unavailable</td>
+                <td>{{host}}</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/ua</td>
@@ -139,12 +143,12 @@
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/port</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>31330</td>
+                <td>{{port}}</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/lang</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7</td>
+                <td>{{language}}</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/keepalive</td>
@@ -179,26 +183,26 @@
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/forwarded</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>118.112.58.78, 216.239.38.21</td>
+                <td>{{xff}}</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/all</td>
                 <td class="cli_arrow">&rArr;</td>
                 <td>
                     
-                    ip_addr: 118.112.58.78
+                    ip_addr: {{user_ip}}
                     <br>
                     
-                    remote_host: unavailable
+                    remote_host: {{host}}
                     <br>
                     
-                    user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36
+                    user_agent: {{ua}}
                     <br>
                     
-                    port: 31330
+                    port: {{port}}
                     <br>
                     
-                    language: zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7
+                    language: {{language}}
                     <br>
                     
                     referer: 
@@ -225,7 +229,7 @@
                     via: 1.1 google
                     <br>
                     
-                    forwarded: 118.112.58.78, 216.239.38.21
+                    forwarded: {{xff}}
                     <br>
                     
                 </td>
@@ -234,11 +238,11 @@
                 <td class="cli_command">$ curl ifconfig.me/all.xml</td>
                 <td class="cli_arrow">&rArr;</td>
                 <td>&lt;info&gt;
-    &lt;ip_addr&gt;118.112.58.78&lt;/ip_addr&gt;
-    &lt;remote_host&gt;unavailable&lt;/remote_host&gt;
+    &lt;ip_addr&gt;{{user_ip}}&lt;/ip_addr&gt;
+    &lt;remote_host&gt;{{host}}&lt;/remote_host&gt;
     &lt;user_agent&gt;{{ua}}&lt;/user_agent&gt;
-    &lt;port&gt;31330&lt;/port&gt;
-    &lt;language&gt;zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7&lt;/language&gt;
+    &lt;port&gt;{{port}}&lt;/port&gt;
+    &lt;language&gt;{{language}}&lt;/language&gt;
     &lt;referer&gt;&lt;/referer&gt;
     &lt;connection&gt;&lt;/connection&gt;
     &lt;keep_alive&gt;&lt;/keep_alive&gt;
@@ -247,13 +251,13 @@
     &lt;mime&gt;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&lt;/mime&gt;
     &lt;charset&gt;&lt;/charset&gt;
     &lt;via&gt;1.1 google&lt;/via&gt;
-    &lt;forwarded&gt;118.112.58.78, 216.239.38.21&lt;/forwarded&gt;
+    &lt;forwarded&gt;{{xff}}&lt;/forwarded&gt;
 &lt;/info&gt;</td>
             </tr>
             <tr>
                 <td class="cli_command">$ curl ifconfig.me/all.json</td>
                 <td class="cli_arrow">&rArr;</td>
-                <td>{&quot;ip_addr&quot;:&quot;{{user_ip}}}&quot;,&quot;remote_host&quot;:&quot;unavailable&quot;,&quot;user_agent&quot;:&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&quot;,&quot;port&quot;:31330,&quot;language&quot;:&quot;zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;encoding&quot;:&quot;gzip, deflate, br&quot;,&quot;mime&quot;:&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;,&quot;via&quot;:&quot;1.1 google&quot;,&quot;forwarded&quot;:&quot;118.112.58.78, 216.239.38.21&quot;}</td>
+                <td>{&quot;ip_addr&quot;:&quot;{{user_ip}}}&quot;,&quot;remote_host&quot;:&quot;{{host}}&quot;,&quot;user_agent&quot;:&quot;{{ua}}&quot;,&quot;port&quot;:{{port}},&quot;language&quot;:&quot;{{language}}&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;encoding&quot;:&quot;gzip, deflate, br&quot;,&quot;mime&quot;:&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;,&quot;via&quot;:&quot;1.1 google&quot;,&quot;forwarded&quot;:&quot;{{xff}}&quot;}</td>
             </tr>
         </table>
     </div>
