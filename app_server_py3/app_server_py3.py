@@ -10,6 +10,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, Response, make_response, jsonify, current_app, \
     send_from_directory, after_this_request
 
+
 import functools
 from functools import wraps
 import gzip
@@ -24,9 +25,17 @@ except ImportError:
 
 from werkzeug import utils
 
-app = Flask(__name__)
-app.config.from_object(__name__)
+from login_demo import login    # 从分路由倒入路由函数
+from ifconfigme_demo import ifconfigme # 从分路由倒入路由函数
 
+app = Flask(__name__)
+
+
+# 注册蓝图 第一个参数 是蓝图对象
+app.register_blueprint(login) # 注册蓝图login 第一个参数 是蓝图对象
+app.register_blueprint(ifconfigme) # 注册蓝图ifconfigme 第一个参数 是蓝图对象
+
+app.config.from_object(__name__)
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'bank.db'),
     DEBUG=True,
@@ -813,6 +822,7 @@ def returnpac():
     resp = make_response(open('static/pac').read())
     resp.headers["Content-type"]="text/html;charset=UTF-8"
     return resp
+
 
 if __name__ == "__main__":
     init_db()
