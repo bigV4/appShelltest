@@ -7,4 +7,4 @@ login = Blueprint('login',__name__)
  
 @login.route('/login_demo')
 def login_demo():
-    return 'login'
+    return 'login_demo'
