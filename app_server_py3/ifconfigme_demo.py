@@ -34,6 +34,17 @@ def ifconfig_ip():
         resp = make_response("HEAD", 200)
         return resp
 
+@ifconfigme.route('/ifconfig/port/', methods=['GET','POST'])
+@ifconfigme.route('/ifconfig/port')
+def ifconfig_port():
+    if request.method == 'GET' or request.method == 'POST':
+        post = request.environ.get('REMOTE_PORT')
+        resp = make_response(port, 200)
+        return resp
+    elif request.method == 'HEAD':
+        resp = make_response("HEAD", 200)
+        return resp
+
 @ifconfigme.route('/ifconfig/ua/', methods=['GET','POST'])
 @ifconfigme.route('/ifconfig/ua')
 def ifconfig_ua():
@@ -91,15 +102,3 @@ def ifconfig_host():
     elif request.method == 'HEAD':
         resp = make_response("HEAD", 200)
         return resp
-
-@ifconfigme.route('/ifconfig/port/', methods=['GET','POST'])
-@ifconfigme.route('/ifconfig/port')
-def ifconfig_port():
-    if request.method == 'GET' or request.method == 'POST':
-        post = request.environ.get('REMOTE_PORT')
-        resp = make_response(port, 200)
-        return resp
-    elif request.method == 'HEAD':
-        resp = make_response("HEAD", 200)
-        return resp
-        
