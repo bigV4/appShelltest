@@ -25,15 +25,11 @@ except ImportError:
 
 from werkzeug import utils
 
-from login_demo import login    # 从分路由倒入路由函数
-from ifconfigme_demo import ifconfigme # 从分路由倒入路由函数
+
 
 app = Flask(__name__)
 
 
-# 注册蓝图 第一个参数 是蓝图对象
-app.register_blueprint(login) # 注册蓝图login 第一个参数 是蓝图对象
-app.register_blueprint(ifconfigme) # 注册蓝图ifconfigme 第一个参数 是蓝图对象
 
 app.config.from_object(__name__)
 app.config.update(dict(
