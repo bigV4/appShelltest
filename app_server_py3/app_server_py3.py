@@ -5,7 +5,7 @@ import json
 import os.path
 import sys
 import time
-
+import random
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, Response, make_response, jsonify, current_app, \
     send_from_directory, after_this_request
@@ -831,13 +831,15 @@ if __name__ == "__main__":
             if 1<=int(sys.argv[1])<=65535:
                 app.run(host='::', port=sys.argv[1], threaded=True, debug=True)
             else:
-                app.run(host='::', port=8089, threaded=True, debug=True)
+                app.run(host='::', port=5002, threaded=True, debug=True)
     except  IndexError as e1:
         print(e1)
-        app.run(host='::', port=8089, threaded=True, debug=True)
+        app.run(host='::', port=5002, threaded=True, debug=True)
     except  ValueError as e2:
         print(e2)
-        app.run(host='::', port=8089, threaded=True, debug=True)
-    
+        app.run(host='::', port=5002, threaded=True, debug=True)
+    except OSError as e3:
+        print(e3)
+        app.run(host='::', port=5002+random.randint(0,100), threaded=True, debug=True)
     # server = pywsgi.WSGIServer(('::', 5001), app)
     # server.serve_forever()
