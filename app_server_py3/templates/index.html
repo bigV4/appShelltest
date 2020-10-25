@@ -157,6 +157,7 @@
                 var str = "";
                 for (var i = 0; i < size; i++) {
                     var pos = Math.round(Math.random() * (this.baseString.length - 1));
+                    console.log("var pos =", pos)
                     str += this.baseString.charAt(pos);
                 }
                 return str;
@@ -307,17 +308,17 @@
                     document.getElementById("myDiv2").innerHTML = xmlhttp.responseText;
                 }
             }
-            xmlhttp.open("GET", "/test_ajax_get/?data=12345689", true);
+            xmlhttp.open("GET", "/test_ajax_get/?data=ABCD&id=1234", true);
             xmlhttp.send();
         }
     </script>
-    <div id="myDiv1">
-        <h2>1、使用 AJAX 修改该文本内容</h2>
+
+    <div class="test-block">
+        <div id="myDiv1" class="block-title">1、使用 AJAX 修改该文本内容</div>
+        <pre id="myDiv2">AJAX 响应文本内容</pre>
+        <button type="button" onclick="loadXMLDoc()">修改内容</button>
     </div>
-    <div id="myDiv2">
-        AJAX 响应内容
-    </div>
-    <button type="button" onclick="loadXMLDoc()">修改内容</button>
+
 </body>
 
 </html>
